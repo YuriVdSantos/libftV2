@@ -10,7 +10,27 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <stdlib.h>
+
+char *ft_strmapi(char const *s, char (*f)(unsigned int, char))
+{
+    char *str;
+    unsigned int i;
+
+    if (!s || !f)
+        return (NULL);
+    str = (char *)malloc(sizeof(char) * (strlen(s) + 1));
+    if (!str)
+        return (NULL);
+    i = 0;
+    while (s[i])
+    {
+        str[i] = (*f)(i, s[i]);  // Ensure `f` takes `(index, char)` as parameters
+        i++;
+    }
+    str[i] = '\0';
+    return (str);
+}
 
 char *ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
