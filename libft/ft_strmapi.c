@@ -1,17 +1,30 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yvieira- <yvieira-@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/28 18:22:11 by yvieira-          #+#    #+#             */
+/*   Updated: 2024/10/28 19:22:45 by yvieira-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
-char	*ft_strmap(char const *s, char (*f)(char))
+char	*ft_strmapi(char const *s, char (*f)(char))
 {
-	char	*ret;
-	int		x;
-
-	if (!s || !f)
+	char	*str;
+	size_t	i;
+	
+	if(!(str = ft_strdup(s)))
 		return (NULL);
-	ret = ft_strnew(ft_strlen(s));
-	if (!ret)
-		return (NULL);
-	x = -1;
-	while (s[++x])
-		ret[x] = f(s[x]);
-	return (ret);
+	i = 0;
+	while (s[i])
+	{
+		str[i] = (*f)(i, s[i]);
+		i++;
+	}
+	return (str);	
 }
+

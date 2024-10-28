@@ -6,7 +6,7 @@
 /*   By: yvieira- <yvieira-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 17:29:53 by yvieira-          #+#    #+#             */
-/*   Updated: 2024/10/25 17:36:08 by yvieira-         ###   ########.fr       */
+/*   Updated: 2024/10/28 18:39:39 by yvieira-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,8 @@ char	*ft_strdup(const char	*s1)
 	char	*str;
 	size_t	i;
 
-	if(!s1)
-		return (NULL);
-	str = (char*)malloc(sizeof(*s1) * (ft_strlen(s1) + 1));
-	if(!str)
+	str = (char *)malloc(sizeof(*s1) * (ft_strlen(s1) + 1));
+	if (!str)
 		return (NULL);
 	i = 0;
 	while (s1[i] != '\0')

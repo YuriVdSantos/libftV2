@@ -1,25 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoi.c                                          :+:      :+:    :+:   */
+/*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yvieira- <yvieira-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 15:34:27 by yvieira-          #+#    #+#             */
-/*   Updated: 2024/10/25 15:35:02 by yvieira-         ###   ########.fr       */
+/*   Updated: 2024/10/28 18:07:32 by yvieira-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int
-	ft_abs(int nbr)
+static int	ft_abs(int nbr)
 {
-	return ((nbr < 0) ? -nbr : nbr);
+	if (nbr < 0)
+		return (-nbr);
+	return (nbr);
 }
 
-static void
-	ft_strrev(char *str)
+static int	count_digits(int n)
+{
+	int	count;
+
+	if (n <= 0)
+		count = 1;
+	else
+		count = 0;
+	while (n != 0)
+	{
+		n /= 10;
+		count++;
+	}
+	return (count);
+}
+
+static void	ft_strrev(char *str)
 {
 	size_t	length;
 	size_t	i;
@@ -36,15 +52,16 @@ static void
 	}
 }
 
-char
-	*ft_itoa(int n)
+char	*ft_itoa(int n)
 {
 	char	*str;
 	int		is_neg;
 	size_t	length;
 
+	length = count_digits(n);
 	is_neg = (n < 0);
-	if (!(str = ft_calloc(11 + is_neg, sizeof(*str))))
+	str = ft_calloc((length + 1), sizeof(char));
+	if (!str)
 		return (NULL);
 	if (n == 0)
 		str[0] = '0';

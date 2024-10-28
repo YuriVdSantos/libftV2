@@ -6,7 +6,7 @@
 /*   By: yvieira- <yvieira-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 11:53:15 by yvieira-          #+#    #+#             */
-/*   Updated: 2024/10/25 18:14:58 by yvieira-         ###   ########.fr       */
+/*   Updated: 2024/10/28 17:57:02 by yvieira-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 void	ft_bzero(void *s, size_t n)
 {
 	size_t	i;
-	char *ptr;
-	
+	char	*ptr;
+
 	if (n == 0)
-		return;
-	ptr = (char	*)s;
+		return ;
+	ptr = (char *)s;
 	i = 0;
 	while (i < n)
 	{

@@ -34,7 +34,9 @@ SRC = 	ft_atoi.c\
 		ft_split.c\
 		ft_strjoin.c\
 		ft_strdup.c\
-		ft_itoa.c
+		ft_itoa.c\
+		ft_strmapi.c\
+		ft_striteri.c
 
 
 

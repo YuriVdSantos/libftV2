@@ -6,7 +6,7 @@
 /*   By: yvieira- <yvieira-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 15:36:41 by yvieira-          #+#    #+#             */
-/*   Updated: 2024/10/25 17:35:39 by yvieira-         ###   ########.fr       */
+/*   Updated: 2024/10/28 18:29:01 by yvieira-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,11 @@
 static int
 	ft_abs(int nbr)
 {
-	return ((nbr < 0) ? -nbr : nbr);
+	if (nbr < 0)
+	{
+		return (-nbr);
+	}
+	return (nbr);
 }
 
 void

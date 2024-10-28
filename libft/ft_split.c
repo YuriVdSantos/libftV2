@@ -6,7 +6,7 @@
 /*   By: yvieira- <yvieira-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 15:37:26 by yvieira-          #+#    #+#             */
-/*   Updated: 2024/10/25 17:43:47 by yvieira-         ###   ########.fr       */
+/*   Updated: 2024/10/28 17:22:32 by yvieira-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,7 @@ typedef struct {
 	size_t length;
 } t_split_next;
 
-static char
-	**ft_alloc_split(char const *s, char c)
+static char	**ft_alloc_split(char const *s, char c)
 {
 	size_t	i;
 	char	**split;
@@ -28,18 +27,17 @@ static char
 	total = 0;
 	while (s[i])
 	{
-		if (s[i] == c)
+		if (s[i] != c && (s[i +1] == c || s[i + 1] == '\0'))
 			total++;
 		i++;
 	}
-	split = (char**)malloc(sizeof(char*) * (total + 2));
+	split = (char**)malloc(sizeof(char*) * (total + 1));
 	if (!split)
 		return (NULL);
 	return (split);
 }
 
-void
-	*ft_free_all_split_alloc(char **split, size_t elts)
+void	*ft_free_all_split_alloc(char **split, size_t elts)
 {
 	size_t	i;
 
@@ -53,8 +51,7 @@ void
 	return (NULL);
 }
 
-static void
-	*ft_split_range(char **split, char const *s,
+static void	*ft_split_range(char **split, char const *s,
 		t_split_next *st, t_split_next *lt)
 {
 	split[lt->length] = ft_substr(s, st->start, st->length);
@@ -64,8 +61,7 @@ static void
 	return (split);
 }
 
-static void
-	*ft_split_by_char(char **split, char const *s, char c)
+static void	*ft_split_by_char(char **split, char const *s, char c)
 {
 	size_t			i;
 	t_split_next	st;
@@ -90,12 +86,11 @@ static void
 	st.length = (i - lt.start);
 	if (i > lt.start && i > 0 && !ft_split_range(split, s, &st, &lt))
 		return (NULL);
-	split[lt.length] = NULL;  // Corrigido para NULL
+	split[lt.length] = NULL;
 	return (split);
 }
 
-char
-	**ft_split(char const *s, char c)
+char	**ft_split(char const *s, char c)
 {
 	char	**split;
 
