@@ -6,7 +6,7 @@
 /*   By: yvieira- <yvieira-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 15:10:43 by yvieira-          #+#    #+#             */
-/*   Updated: 2024/10/28 18:23:12 by yvieira-         ###   ########.fr       */
+/*   Updated: 2024/10/28 20:03:51 by yvieira-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,10 @@
 # include <unistd.h>
 # include <string.h>
 
+typedef struct {
+    size_t start;
+    size_t length;
+} t_split_next;
 int		ft_atoi(const char *str);
 void	*ft_calloc(size_t	count, size_t	size);
 void	ft_bzero(void *s, size_t n);
@@ -49,5 +53,5 @@ void	ft_putchar_fd(char c, int fd);
 char	*ft_itoa(int n);
 char	*ft_strtrim(char const *s1, char const *set);
 void	ft_striteri(char *s, void (*f)(unsigned int, char *));
-char	*ft_strmap(char const *s, char (*f)(char));
+char *ft_strmapi(char const *s, char (*f)(unsigned int, char));
 #endif

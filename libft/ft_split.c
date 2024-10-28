@@ -6,16 +6,15 @@
 /*   By: yvieira- <yvieira-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 15:37:26 by yvieira-          #+#    #+#             */
-/*   Updated: 2024/10/28 17:22:32 by yvieira-         ###   ########.fr       */
+/*   Updated: 2024/10/28 20:02:55 by yvieira-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-typedef struct {
-	size_t start;
-	size_t length;
-} t_split_next;
+// typedef struct {
+// 	size_t start;
+// 	size_t length;
+// } t_split_next;
 
 static char	**ft_alloc_split(char const *s, char c)
 {
@@ -27,11 +26,11 @@ static char	**ft_alloc_split(char const *s, char c)
 	total = 0;
 	while (s[i])
 	{
-		if (s[i] != c && (s[i +1] == c || s[i + 1] == '\0'))
+		if (s[i] != c && (s[i + 1] == c || s[i + 1] == '\0'))
 			total++;
 		i++;
 	}
-	split = (char**)malloc(sizeof(char*) * (total + 1));
+	split = (char **)malloc(sizeof(char *) * (total + 1));
 	if (!split)
 		return (NULL);
 	return (split);
@@ -61,30 +60,29 @@ static void	*ft_split_range(char **split, char const *s,
 	return (split);
 }
 
+static void	*process_segment(char **split, char const *s,
+	t_split_next *lt, size_t i)
+{
+	t_split_next st = {lt->start, i - lt->start};
+    
+	if (i > lt->start && !ft_split_range(split, s, &st, lt))
+		return (NULL);
+	lt->start = i + 1;
+	return (split);
+}
+
 static void	*ft_split_by_char(char **split, char const *s, char c)
 {
-	size_t			i;
-	t_split_next	st;
-	t_split_next	lt;
+	size_t i = 0;
+	t_split_next lt = {0, 0};
 
-	i = 0;
-	lt.length = 0;
-	lt.start = 0;
 	while (s[i])
 	{
-		if (s[i] == c)
-		{
-			st.start = lt.start;
-			st.length = (i - lt.start);
-			if (i > lt.start && !ft_split_range(split, s, &st, &lt))
-				return (NULL);
-			lt.start = i + 1;
-		}
+		if (s[i] == c && !process_segment(split, s, &lt, i))
+			return (NULL);
 		i++;
 	}
-	st.start = lt.start;
-	st.length = (i - lt.start);
-	if (i > lt.start && i > 0 && !ft_split_range(split, s, &st, &lt))
+	if (!process_segment(split, s, &lt, i))
 		return (NULL);
 	split[lt.length] = NULL;
 	return (split);
@@ -94,7 +92,8 @@ char	**ft_split(char const *s, char c)
 {
 	char	**split;
 
-	if (!(split = ft_alloc_split(s, c)))
+	split = ft_alloc_split(s, c);
+	if (!split)
 		return (NULL);
 	if (!ft_split_by_char(split, s, c))
 	{
