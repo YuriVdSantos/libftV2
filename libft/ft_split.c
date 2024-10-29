@@ -3,20 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yvieira- <yvieira-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yurivieiradossantos <yurivieiradossanto    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 15:37:26 by yvieira-          #+#    #+#             */
-/*   Updated: 2024/10/28 20:02:55 by yvieira-         ###   ########.fr       */
+/*   Updated: 2024/10/29 00:00:03 by yurivieirad      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-// typedef struct {
-// 	size_t start;
-// 	size_t length;
-// } t_split_next;
 
-static char	**ft_alloc_split(char const *s, char c)
+static char
+	**ft_alloc_split(char const *s, char c)
 {
 	size_t	i;
 	char	**split;
@@ -30,13 +27,14 @@ static char	**ft_alloc_split(char const *s, char c)
 			total++;
 		i++;
 	}
-	split = (char **)malloc(sizeof(char *) * (total + 1));
+	split = (char **)malloc(sizeof(s) * (total + 1));
 	if (!split)
 		return (NULL);
 	return (split);
 }
 
-void	*ft_free_all_split_alloc(char **split, size_t elts)
+void
+	*ft_free_all_split_alloc(char **split, size_t elts)
 {
 	size_t	i;
 
@@ -50,7 +48,8 @@ void	*ft_free_all_split_alloc(char **split, size_t elts)
 	return (NULL);
 }
 
-static void	*ft_split_range(char **split, char const *s,
+static void
+	*ft_split_range(char **split, char const *s,
 		t_split_next *st, t_split_next *lt)
 {
 	split[lt->length] = ft_substr(s, st->start, st->length);
@@ -60,35 +59,38 @@ static void	*ft_split_range(char **split, char const *s,
 	return (split);
 }
 
-static void	*process_segment(char **split, char const *s,
-	t_split_next *lt, size_t i)
+static void
+	*ft_split_by_char(char **split, char const *s, char c)
 {
-	t_split_next st = {lt->start, i - lt->start};
-    
-	if (i > lt->start && !ft_split_range(split, s, &st, lt))
-		return (NULL);
-	lt->start = i + 1;
-	return (split);
-}
+	size_t			i;
+	t_split_next	st;
+	t_split_next	lt;
 
-static void	*ft_split_by_char(char **split, char const *s, char c)
-{
-	size_t i = 0;
-	t_split_next lt = {0, 0};
-
+	i = 0;
+	lt.length = 0;
+	lt.start = 0;
 	while (s[i])
 	{
-		if (s[i] == c && !process_segment(split, s, &lt, i))
-			return (NULL);
+		if (s[i] == c)
+		{
+			st.start = lt.start;
+			st.length = (i - lt.start);
+			if (i > lt.start && !ft_split_range(split, s, &st, &lt))
+				return (NULL);
+			lt.start = i + 1;
+		}
 		i++;
 	}
-	if (!process_segment(split, s, &lt, i))
+	st.start = lt.start;
+	st.length = (i - lt.start);
+	if (i > lt.start && i > 0 && !ft_split_range(split, s, &st, &lt))
 		return (NULL);
-	split[lt.length] = NULL;
+	split[lt.length] = 0;
 	return (split);
 }
 
-char	**ft_split(char const *s, char c)
+char
+	**ft_split(char const *s, char c)
 {
 	char	**split;
 
@@ -96,9 +98,6 @@ char	**ft_split(char const *s, char c)
 	if (!split)
 		return (NULL);
 	if (!ft_split_by_char(split, s, c))
-	{
-		ft_free_all_split_alloc(split, 0);
 		return (NULL);
-	}
 	return (split);
 }

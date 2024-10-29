@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yvieira- <yvieira-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yurivieiradossantos <yurivieiradossanto    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 13:36:58 by yvieira-          #+#    #+#             */
-/*   Updated: 2024/10/28 18:20:54 by yvieira-         ###   ########.fr       */
+/*   Updated: 2024/10/29 00:45:38 by yurivieirad      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,29 @@
 
 void	*ft_memmove(void *dest, const void *src, size_t n)
 {
-	unsigned char		*d;
-	const unsigned char	*s;
 	size_t				i;
+	unsigned char		*ptr_dest;
+	const unsigned char	*ptr_src;
 
-	d = (unsigned char *) dest;
-	s = (const unsigned char *) src;
-	if (!dest && !src)
-		return (NULL);
-	if (d < s)
+	ptr_dest = (unsigned char *)dest;
+	ptr_src = (const unsigned char *)src;
+	i = 0;
+	if (ptr_dest < ptr_src)
 	{
-		i = 0;
 		while (i < n)
 		{
-			d[i] = s[i];
+			ptr_dest[i] = ptr_src[i];
 			i++;
 		}
 	}
 	else
 	{
-		while (n-- > 0)
-			d[n] = s[n];
+		while (n > 0)
+		{
+			ptr_dest[n - 1] = ptr_src[n - 1];
+			n--;
+		}
 	}
 	return (dest);
 }
+

@@ -3,25 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yvieira- <yvieira-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yurivieiradossantos <yurivieiradossanto    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 15:10:43 by yvieira-          #+#    #+#             */
-/*   Updated: 2024/10/28 20:03:51 by yvieira-         ###   ########.fr       */
+/*   Updated: 2024/10/29 00:08:01 by yurivieirad      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
+
 # include <stdlib.h>
 # include <unistd.h>
 # include <string.h>
 
-typedef struct {
-    size_t start;
-    size_t length;
-} t_split_next;
+typedef struct s_split_next
+{
+	size_t	start;
+	size_t	length;
+}	t_split_next;
+
 int		ft_atoi(const char *str);
-void	*ft_calloc(size_t	count, size_t	size);
+void	*ft_calloc(size_t count, size_t size);
 void	ft_bzero(void *s, size_t n);
 int		ft_isalnum(int ch);
 int		ft_isalpha(int ch);
@@ -43,7 +46,7 @@ char	*ft_strnstr(const char *str, const char *to_find, size_t n);
 char	*ft_strrchr(const char *s, int c);
 int		ft_tolower(int ch);
 int		ft_toupper(int ch);
-char	*ft_strdup(const char	*s1);
+char	*ft_strdup(const char *s1);
 char	**ft_split(char const *s, char c);
 char	*ft_strjoin(char const *s1, char const *s2);
 void	ft_putstr_fd(char *s, int fd);
@@ -53,5 +56,6 @@ void	ft_putchar_fd(char c, int fd);
 char	*ft_itoa(int n);
 char	*ft_strtrim(char const *s1, char const *set);
 void	ft_striteri(char *s, void (*f)(unsigned int, char *));
-char *ft_strmapi(char const *s, char (*f)(unsigned int, char));
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
+
 #endif
